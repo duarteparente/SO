@@ -15,7 +15,8 @@ int main(){
         }
         int status;
         wait(&status);
-        printf("Exit order: %d\n",WEXITSTATUS(status));
+        if (WIFEXITED(status))
+            printf("Exit order: %d\n",WEXITSTATUS(status));
     }
 
     return 0;

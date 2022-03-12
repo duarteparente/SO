@@ -15,8 +15,9 @@ int main(){
     }
     int status;
     for(int i=0; i<10; i++){
-        wait(&status);
-        printf("Exit order: %d\n",WEXITSTATUS(status));
+        pid_t pid = wait(&status);
+        if (pid != -1 && WIFEXITED(status))
+            printf("Exit order: %d\n",WEXITSTATUS(status));
     }
     return 0;
 }

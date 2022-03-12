@@ -45,7 +45,10 @@ int main(int argc, char *argv[]){
             lseek(fd,0,SEEK_SET);
             _exit(1);
         }
-        wait(&status);
+        if (wait(&status) < 0){
+            puts("fatal: error waiting for child process");
+            exit(-1);
+        }
         read(fd,buf,256);
         lseek(fd,0,SEEK_SET);
         total += atoi(buf);
