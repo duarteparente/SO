@@ -27,18 +27,3 @@ int mySystem(char *commands){
     if(!WIFEXITED(status) || WEXITSTATUS(status) == 1) _exit(2);
     return 0;
 }
-
-
-int main(){
-    char commands[1024];
-    fgets(commands, 1024, stdin);
-    int last_index = strcspn(commands, "\n");
-    commands[last_index] = '\0';
-    int result = mySystem(commands);
-    switch(result){
-        case -1: printf("could not create child process\n"); _exit(-1);
-        case 2: printf("command could not be executed\n"); _exit(-1);
-        default: break;
-    }
-    return 0;
-}
